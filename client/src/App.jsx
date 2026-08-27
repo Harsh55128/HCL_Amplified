@@ -3,7 +3,7 @@ import {
     Routes,
     Route
 } from "react-router-dom";
-
+import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Goals from "./pages/Goals";
 import GoalDetails from "./pages/GoalDetails";
@@ -17,7 +17,7 @@ function App() {
         <BrowserRouter>
 
             <Routes>
-
+                   <Route path="/" element={<Home />} />
                 <Route
                     path="/"
                     element={<Dashboard />}
