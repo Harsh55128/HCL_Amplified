@@ -158,35 +158,112 @@ If GEMINI_MODEL is not provided, the backend uses its configured default model.
 
 Never commit API keys or .env files to GitHub.
 
-🏗️ Project Architecture
+# 🏗️ Project Architecture
 
-The project is divided into frontend and backend applications.
+The project is divided into two main applications:
 
-LearnPath AI
+- **Client** → React frontend
+- **Server** → Node.js + Express backend
+
+```text
+LearnPath AI/
 │
-├── client/                 # React frontend
+├── client/                    # React frontend
+│   │
 │   ├── src/
 │   │   ├── components/
 │   │   ├── pages/
 │   │   ├── services/
 │   │   ├── config/
 │   │   └── ...
-│   └── package.json
+│   │
+│   ├── package.json
+│   └── ...
 │
-├── server/                 # Node.js / Express backend
+├── server/                    # Node.js + Express backend
+│   │
 │   ├── src/
+│   │   ├── config/
 │   │   ├── controllers/
+│   │   ├── models/
 │   │   ├── routes/
 │   │   ├── services/
-│   │   ├── models/
-│   │   ├── config/
 │   │   ├── app.js
 │   │   └── server.js
-│   └── package.json
+│   │
+│   ├── package.json
+│   └── ...
 │
-└── README.md
+├── .gitignore
+├── README.md
+└── ...
+```
 
-Folder names may differ slightly depending on the current repository structure.
+### 🔄 Application Flow
+
+```text
+                    ┌─────────────────────┐
+                    │   React Frontend    │
+                    │      (client)       │
+                    └──────────┬──────────┘
+                               │
+                               │ REST API
+                               ▼
+                    ┌─────────────────────┐
+                    │  Express Backend    │
+                    │      (server)       │
+                    └──────────┬──────────┘
+                               │
+                 ┌─────────────┼─────────────┐
+                 ▼             ▼             ▼
+          ┌────────────┐ ┌───────────┐ ┌────────────┐
+          │  MongoDB   │ │  Gemini   │ │ REST APIs │
+          │  Database  │ │    AI     │ │            │
+          └────────────┘ └───────────┘ └────────────┘
+```
+
+### 📂 Backend Structure
+
+```text
+server/
+└── src/
+    ├── config/
+    │   └── db.js
+    │
+    ├── controllers/
+    │   ├── goal.controller.js
+    │   ├── graph.controller.js
+    │   ├── learningPath.controller.js
+    │   ├── skillGap.controller.js
+    │   ├── user.controller.js
+    │   └── userSkill.controller.js
+    │
+    ├── models/
+    │   └── ...
+    │
+    ├── routes/
+    │   └── ...
+    │
+    ├── services/
+    │   └── ...
+    │
+    ├── app.js
+    └── server.js
+```
+
+### 📂 Frontend Structure
+
+```text
+client/
+└── src/
+    ├── components/
+    ├── pages/
+    ├── services/
+    ├── config/
+    └── ...
+```
+
+> The exact files and folders may evolve as the project grows.
 
 🛠️ Technology Stack
 
